@@ -57,7 +57,7 @@ public class PART implements Executable {
     }
 
 
-    public synchronized void partFromChannel(Channel channel, Connection connection, String partMessage) {
+    static public synchronized void partFromChannel(Channel channel, Connection connection, String partMessage) {
         String message = channel.getName();
 
         if (partMessage != null && !partMessage.equals("")) {

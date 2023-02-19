@@ -7,11 +7,13 @@ import com.francisbailey.irc.ServerManager;
 import com.francisbailey.irc.message.ClientMessage;
 import com.francisbailey.irc.message.ServerMessage;
 import com.francisbailey.irc.message.ServerMessageBuilder;
+import com.francisbailey.irc.mode.Mode;
 
 import java.util.ArrayList;
 
 /**
  * Created by fbailey on 01/12/16.
+ * Updated by Pierre Valleau on 18/02/2023
  */
 public class PRIVMSG implements Executable {
 
@@ -19,12 +21,20 @@ public class PRIVMSG implements Executable {
 
     public void execute(Connection connection, ClientMessage clientMessage, ServerManager server) {
 
-        String target = clientMessage.getParameter(0);
+        String rtarget = clientMessage.getParameter(0);
         String message = clientMessage.getParameter(1);
-
+        String targets[]=new String[1];
+        targets[0]=rtarget;
+        if (rtarget.contains(","))
+        	targets=rtarget.split(",");
+        for(String target:targets)
+        {
         // target is a channel, check that the channel exists
         if (server.getChannelManager().isChannel(target)) {
+        	
             Channel chan = server.getChannelManager().getChannel(target);
+            if (!chan.hasModeForUser(connection, Mode.BAN_MASK)
+            		|| chan.hasModeForUser(connection, Mode.BAN_MASK_EXCEPTION))
             sendChannelMessage(connection, chan, target, message);
         }
         else if (server.getChannelManager().isChannelType(target)){
@@ -37,7 +47,26 @@ public class PRIVMSG implements Executable {
         }
         else {
             Connection targetConnection = server.findConnectionByNick(target);
+            if(targetConnection==null)
+            { connection.send(ServerMessageBuilder
+                        .from(server.getName())
+                        .withReplyCode(ServerMessage.ERR_NOSUCHNICK )
+                        .andMessage(connection.getClientInfo().getNick()+" "+
+                        		target+" :No such nick/channel")
+                        .build()
+                    );
+            return;
+            }
             sendPrivateMessage(connection, targetConnection, server, message);
+            if(targetConnection.getModes().hasMode(Mode.AWAY))
+            	 connection.send(ServerMessageBuilder
+                         .from(server.getName())
+                         .withReplyCode(ServerMessage.RPL_AWAY)
+                         .andMessage(connection.getClientInfo().getNick()+" "+
+                        		 targetConnection.getClientInfo().getNick()+" :")
+                         .build()
+                     );
+        }
         }
 
     }

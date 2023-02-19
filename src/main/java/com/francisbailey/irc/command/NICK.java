@@ -95,11 +95,51 @@ public class NICK implements Executable {
      */
     private boolean isValidNick(String nick) {
 
-        if (nick.length() > 9) {
-            return false;
-        }
+    	 if (nick.length() > 9) {
+             return false;
+         }
+    	 /*They MUST NOT contain any of the following characters: space (' ', 0x20), comma (',', 0x2C), asterisk ('*', 0x2A), question mark ('?', 0x3F), exclamation mark ('!', 0x21), at sign ('@', 0x40).
+    	  * */
+    	 if (nick.contains(" ") ) {
+             return false;
+         }
+    	 if (nick.contains(",") ) {
+             return false;
+         }
+    	 if (nick.contains("*") ) {
+             return false;
+         }
+    	 if (nick.contains("?") ) {
+             return false;
+         }
+    	 if (nick.contains("!") ) {
+             return false;
+         }
+    	 if (nick.contains("@") ) {
+             return false;
+         }
+/*They MUST NOT start with any of the following characters: dollar ('$', 0x24), colon (':', 0x3A).*/
+    	 
+    	 if (nick.startsWith("$") ) {
+             return false;
+         }
 
-        return true;
+    	 if (nick.startsWith(":") ) {
+             return false;
+         }
+    	 /*They MUST NOT start with a character listed as a channel type prefix*/
+    	 if (nick.startsWith("#") ) {
+             return false;
+         }
+    	 if (nick.startsWith("&") ) {
+             return false;
+         }
+    	 /*They SHOULD NOT contain any dot character ('.', 0x2E).*/
+    	 if (nick.startsWith(".") ) {
+             return false;
+         }
+
+    	 return true;
     }
 
 }
