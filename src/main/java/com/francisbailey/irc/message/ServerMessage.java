@@ -12,7 +12,9 @@ public class ServerMessage implements SendableMessage {
     /**
      * Numeric Server Reply Codes
      */
-    public static final String ERR_NOSUCHNICK = "401";
+	public static final String ERR_NOSUCHNICK = "401";
+	public static final String ERR_INVALIDKEY = "525";
+    
     public static final String ERR_NOSUCHSERVER = "402";
     public static final String ERR_NOSUCHCHANNEL = "403";
     public static final String ERR_CANNOTSENDTOCHAN = "404";
@@ -49,11 +51,19 @@ public class ServerMessage implements SendableMessage {
     public static final String ERR_YOUREBANNEDCREEP = "465";
     public static final String ERR_YOUWILLBEBANNED = "466";
     public static final String ERR_KEYSET = "467";
+    /** ERR_CHANNELISFULL (471)
+
+  "<client> <channel> :Cannot join channel (+l)"
+
+Returned to indicate that a JOIN command failed because the client limit mode has been set and the maximum number of users are already joined to the channel. The text used in the last param of this message may vary.
+*/
     public static final String ERR_CHANNELISFULL = "471";
     public static final String ERR_UNKNOWNMODE = "472";
     public static final String ERR_INVITEONLYCHAN = "473";
     public static final String ERR_BANNEDFROMCHAN = "474";
     public static final String ERR_BADCHANNELKEY = "475";
+    public static final String ERR_BADCHANMASK = "476";
+    
     public static final String ERR_NOCHANMODES = "477";
     public static final String ERR_BANLISTFULL = "478";
     public static final String ERR_NOPRIVILEGES = "481";
@@ -82,6 +92,7 @@ public class ServerMessage implements SendableMessage {
     public static final String RPL_WHOISCHANNELS = "319";
     public static final String RPL_WHOWASUSER = "314";
     public static final String RPL_ENDOFWHOWAS = "369";
+    public static final String RPL_LISTSTART  = "321";
     public static final String RPL_LIST = "322";
     public static final String RPL_LISTEND = "323";
     public static final String RPL_UNIQOPIS = "325";

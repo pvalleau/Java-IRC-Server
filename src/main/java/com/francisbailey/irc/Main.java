@@ -16,7 +16,7 @@ public class Main {
      */
     public static void main(String[] args) throws ConfigurationException {
 
-        File f = new File("config.xml");
+        File f = new File("src/main/resources/config.xml");
 
         System.setProperty("log4j.configurationFile", "log4j.properties");
 

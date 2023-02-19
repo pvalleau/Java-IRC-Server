@@ -20,7 +20,7 @@ public class ConfigTest {
     @org.junit.Before
     public void setUp() throws Exception {
 
-        File f = new File("src/test/java/test-config.xml");
+        File f = new File("src/test/resources/test-config.xml");
         XMLConfigurationReader xcr = new XMLConfigurationReader(f);
         this.config = new XMLConfig(xcr.getConfiguration());
     }

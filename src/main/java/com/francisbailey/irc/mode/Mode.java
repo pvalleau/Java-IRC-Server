@@ -35,7 +35,12 @@ public class Mode {
     public static final Mode RESTRICTED         = new Mode("r", "RESTRICTED");
     public static final Mode SNOTICE            = new Mode("s", "SNOTICE");
     public static final Mode INVISIBLE          = new Mode("i", "INVISIBLE");
+    
 
+    public static final Mode Founder           = new Mode("+q", "FOUNDER");
+    public static final Mode Protected            = new Mode("+a", "PROTECTED");
+    public static final Mode Halfop             = new Mode("+h", "HALFOP");
+    
     public final static HashMap<String, Mode> channelModes = new HashMap<>();
     static {
         channelModes.put(VOICE.getFlag(),              VOICE);
