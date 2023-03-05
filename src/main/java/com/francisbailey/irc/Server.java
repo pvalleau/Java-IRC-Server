@@ -12,6 +12,7 @@ import com.francisbailey.irc.mode.strategy.ChannelUserModeStrategy;
 import com.francisbailey.irc.mode.strategy.StandardChannelModeStrategy;
 import com.francisbailey.irc.mode.strategy.StandardUserModeStrategy;
 import com.francisbailey.irc.mode.strategy.UserModeStrategy;
+import com.valleau.pierre.irc.RegisterFile;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -215,6 +216,7 @@ public class Server implements ConnectionDelegate, ServerManager, Loggable {
         c.register(clientInfo);
         this.registeredConnections.add(c);
         this.connections.remove(c);
+        
     }
 
 
@@ -273,4 +275,29 @@ public class Server implements ConnectionDelegate, ServerManager, Loggable {
             c.send(sm);
         }
     }
+
+
+	@Override
+	public boolean isRegisteredConnection(String nick) {
+		for (Connection c:registeredConnections)
+			if(c.getClientInfo().getNick().equals(nick))
+			return true;
+		return false;
+	}
+
+
+	@Override
+	public boolean isConnected(String nick) {
+		for (Connection c:connections)
+			if(c.getClientInfo().getNick().equals(nick))
+			return true;
+		return false;
+	}
+
+
+	@Override
+	public RegisterFile getRegister() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

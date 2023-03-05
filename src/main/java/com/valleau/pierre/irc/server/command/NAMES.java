@@ -1,4 +1,4 @@
-package com.francisbailey.irc.command;
+package com.valleau.pierre.irc.server.command;
 
 import com.francisbailey.irc.Channel;
 import com.francisbailey.irc.ChannelManager;

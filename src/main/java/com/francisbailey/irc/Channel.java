@@ -488,7 +488,7 @@ Specific prefixes and moderation levels are covered in the Channel Membership Pr
 	}
 
 	public Connection getUsers(String nickname) {
-		if (nickname==null || nickname.isBlank())
+		if ((nickname==null) || nickname.isBlank())
 			return null;
 		for(Connection user:getUsers())
 			if (nickname.equals(user.getClientInfo().getNick()))

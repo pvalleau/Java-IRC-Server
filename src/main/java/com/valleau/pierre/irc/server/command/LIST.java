@@ -1,4 +1,4 @@
-package com.francisbailey.irc.command;
+package com.valleau.pierre.irc.server.command;
 
 import com.francisbailey.irc.Channel;
 import com.francisbailey.irc.ChannelManager;
@@ -16,7 +16,6 @@ import java.util.ArrayList;
  *
   */
 public class LIST implements Executable {
-
 	public void execute(Connection connection, ClientMessage clientMessage, ServerManager server) {
 
 		String ListChannel = null;

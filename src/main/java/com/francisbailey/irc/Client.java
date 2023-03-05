@@ -19,12 +19,25 @@ public class Client {
         this.realName = realName;
     }
 
+    public String info()
+    {
+    	return "Nick : "+nick+"\r\n"+
+    		   "Username : "+username+"\r\n"+
+    		   "HostName : "+hostName+"\r\n"+
+    		   "RealName : "+realName+"\r\n";
+    }
 
     public Client() {
         this.nick = "*";
         this.username = "*";
         this.hostName = "*";
         this.realName = "*";
+    }
+    public Client(Client c) {
+        this.nick = c.nick;
+        this.username = c.username;
+        this.hostName = c.hostName;
+        this.realName = c.realName;
     }
 
 
@@ -58,6 +71,8 @@ public class Client {
     }
 
     public String getNick() {
+    	if (this.nick==null)
+    		return "*";
         return this.nick;
     }
 
